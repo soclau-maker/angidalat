@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import FoodImage from '../../components/FoodImage.astro';
+import Provenance from '../../components/Provenance.astro';
+import {dishes,restaurants} from '../../data/catalog.mjs';
+export function getStaticPaths(){return dishes.map(dish=>({params:{slug:dish.slug},props:{dish}}));}
+const {dish}=Astro.props;
+const restaurant=restaurants.find(r=>r.dish===dish.slug)!;
+---
+<Layout title={`${dish.name} ở Đà Lạt`} description={dish.intro} image={dish.image}><div class="wrap detail"><nav class="breadcrumbs" aria-label="Đường dẫn"><a href="/">Trang chủ</a><span>/</span><a href="/#mon-an">Món ăn</a><span>/</span><span aria-current="page">{dish.name}</span></nav><div class="detail-heading"><p class="eyebrow">{dish.label} / SỔ TAY ĐÀ LẠT</p><h1>{dish.name}<span class="brand-dot">.</span></h1><p class="lead">{dish.kicker}</p></div><div class="detail-grid"><FoodImage src={dish.image} name={dish.name} eager/><div class="detail-copy"><h2>Một món cho chuyến đi</h2><p>{dish.intro}</p><div class="place-teaser"><p class="eyebrow">ĐỊA CHỈ TRONG SỔ TAY</p><h3>{restaurant.name}</h3><p>{restaurant.address}, Đà Lạt</p><a class="button" href={`/quan/${restaurant.slug}/`}>Xem thông tin quán <span aria-hidden="true">↗</span></a></div><h3>Trước khi gọi món</h3><p>{dish.note}</p><Provenance/></div></div><div class="next-dishes"><h2>Khám phá thêm</h2>{dishes.filter(d=>d.slug!==dish.slug).map(d=><a href={`/mon/${d.slug}/`}>{d.name} <span aria-hidden="true">↗</span></a>)}</div></div></Layout>

@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FoodImage from '../components/FoodImage.astro';
+import DishCard from '../components/DishCard.astro';
+import Provenance from '../components/Provenance.astro';
+import {dishes} from '../data/catalog.mjs';
+---
+<Layout title="Ăn gì hôm nay? Khám phá món ngon Đà Lạt">
+ <section class="hero wrap"><div class="hero-copy"><p class="eyebrow">SỔ TAY ẨM THỰC / SỐ 01</p><h1>Đến Đà Lạt.<br/>Đi tìm<br/><em>một món ăn.</em></h1><p class="hero-intro">Giữa những cuộc dạo chơi, hãy để một món ăn trở thành điểm hẹn tiếp theo.</p><a class="button" href="#mon-an">Hôm nay ăn gì? <span aria-hidden="true">↘</span></a><div class="hero-foot"><span>03 MÓN ĂN</span><span>03 ĐỊA CHỈ GỢI Ý</span></div></div><div class="hero-visual"><FoodImage src="/images/nem-nuong.webp" name="Nem nướng" eager/><a class="hero-caption" href="/mon/nem-nuong/"><span>MÓN ĐẦU TIÊN TRONG SỔ TAY</span><strong>Nem nướng <span aria-hidden="true">↗</span></strong></a></div></section>
+ <div class="ticker"><div class="wrap"><span>CHỌN MÓN TRƯỚC. TÌM QUÁN SAU.</span><span aria-hidden="true">✳</span><span>MỘT CHUYẾN ĐI, NHIỀU HƯƠNG VỊ.</span></div></div>
+ <section class="catalog wrap" id="mon-an" aria-labelledby="catalog-title"><div class="section-heading"><div><p class="eyebrow">BẮT ĐẦU TỪ MÓN BẠN THÍCH</p><h2 id="catalog-title">Hôm nay, ăn gì?</h2></div><p>Ba món. Ba điểm dừng.<br/>Một hành trình do bạn chọn.</p></div><div class="catalog-tools" id="search-tools" hidden><div class="filters" role="group" aria-label="Lọc loại món"><button class="active" data-category="all" aria-pressed="true">Tất cả</button><button data-category="mon-cuon" aria-pressed="false">Món cuốn</button><button data-category="mon-nuoc" aria-pressed="false">Món nước</button></div><div class="search"><label for="food-search">Tìm món hoặc địa chỉ</label><input id="food-search" type="search" placeholder="Thử “mi quang” hoặc “ba hung”…" autocomplete="off"/></div></div><p id="result-count" class="result-count" aria-live="polite">3 món để khám phá</p><div class="dish-grid">{dishes.map((dish,index)=><DishCard dish={dish} index={index}/>)}</div><div id="empty-state" class="empty-state" hidden><h3>Chưa có món bạn tìm.</h3><p>Thử tên món, tên quán hoặc một con đường khác.</p><button id="reset-search" class="button">Xem tất cả món</button></div><noscript><p>Các món vẫn hiển thị đầy đủ. Bật JavaScript để tìm kiếm và lọc.</p></noscript></section>
+ <section class="editorial-note wrap" id="ghi-chu"><div><p class="eyebrow">MỘT CHÚT CHUẨN BỊ</p><h2>Đi với tò mò.<br/>Ghé với thông tin.</h2></div><div><p>Đây là sổ tay gợi ý, không phải bảng xếp hạng. Chúng tôi không chấm điểm hay đưa ra nhận xét về chất lượng các quán.</p><Provenance/><p class="small">Hình ảnh được tạo bằng AI để minh họa món ăn; không đại diện cho khẩu phần hoặc cách trình bày thực tế tại quán. Liên kết Maps chỉ tìm theo tên và địa chỉ, không phải ghim đã xác minh.</p></div></section>
+</Layout>
+<script>
+import {searchDishes} from '../data/catalog.mjs';
+const input=document.querySelector<HTMLInputElement>('#food-search')!;
+const buttons=document.querySelectorAll<HTMLButtonElement>('[data-category]');
+let category='all';
+function update(){const found=searchDishes(input.value,category);const slugs=new Set(found.map(d=>d.slug));document.querySelectorAll<HTMLElement>('.dish-card').forEach(card=>{card.hidden=!slugs.has(card.dataset.slug!);});document.querySelector('#result-count')!.textContent=`${found.length} món để khám phá`;document.querySelector<HTMLElement>('#empty-state')!.hidden=found.length>0;buttons.forEach(button=>{const active=button.dataset.category===category;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});}
+document.querySelector<HTMLElement>('#search-tools')!.hidden=false;
+input.addEventListener('input',update);
+buttons.forEach(button=>button.addEventListener('click',()=>{category=button.dataset.category!;update();}));
+document.querySelector('#reset-search')!.addEventListener('click',()=>{input.value='';category='all';update();input.focus();});
+</script>

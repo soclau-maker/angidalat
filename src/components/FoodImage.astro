@@ -1,0 +1,9 @@
+---
+interface Props { src: string; name: string; eager?: boolean; }
+const {src,name,eager=false}=Astro.props;
+---
+<figure class="food-image">
+ <div class="image-fallback" aria-hidden="true"><span>ĂN GÌ<br/>Ở ĐÀ LẠT?</span><small>{name} · Hình minh họa</small></div>
+ <img src={src} alt={`Hình minh họa AI món ${name}, không phải ảnh món tại quán`} width="1200" height="1200" loading={eager?'eager':'lazy'} decoding="async" onerror="this.style.display='none'" />
+ <figcaption>Ảnh AI minh họa · Không phải món tại quán</figcaption>
+</figure>

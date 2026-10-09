@@ -1,0 +1,8 @@
+---
+import FoodImage from './FoodImage.astro';
+import {restaurants} from '../data/catalog.mjs';
+interface Props { dish: {slug:string;name:string;category:string;label:string;image:string}; index:number; }
+const {dish,index}=Astro.props;
+const r=restaurants.find(r=>r.dish===dish.slug)!;
+---
+<article class="dish-card" data-slug={dish.slug}><a class="card-photo" href={`/mon/${dish.slug}/`} aria-label={`Khám phá ${dish.name}`}><FoodImage src={dish.image} name={dish.name}/></a><div class="card-meta"><span>{dish.label}</span><span>0{index+1}</span></div><h3><a href={`/mon/${dish.slug}/`}>{dish.name}<span aria-hidden="true">↗</span></a></h3><p>{r.name}</p><p class="card-address">{r.address}</p><span class="status">Chưa xác minh</span></article>
