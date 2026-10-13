@@ -1,0 +1,42 @@
+/* Into the Wild / Sean Penn: forest, amber, open air.
+   One dominant scene: a floating food print above the mist. No WebGL. */
+:root{--accent:#a74829;--forest:#17392f}
+body{background-image:radial-gradient(#8a786518 .6px,transparent .6px);background-size:5px 5px}
+.site-header{min-height:100px;border-bottom-color:#c9c2b4}
+.hero-scene{position:relative;isolation:isolate;color:#fff8e9;background:#17392f;overflow:hidden}
+.scene-background{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(9,28,24,.88),rgba(9,28,24,.45) 54%,rgba(9,28,24,.1)),url('/images/dalat-mist-background.webp') center/cover no-repeat;transform:scale(1.025)}
+.hero-scene::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;box-shadow:inset 0 -80px 100px -65px #0b211c}
+.hero{min-height:680px;padding-block:76px 84px;gap:72px;perspective:1400px}
+.hero h1{font-size:clamp(54px,5.8vw,84px);line-height:1.12;letter-spacing:-2.5px;text-shadow:0 3px 24px #071e1870}
+.hero h1 em{color:#f4bb81}
+.hero .eyebrow{color:#ecd3ac;letter-spacing:2.4px}
+.hero-intro{color:#e0e7dd;max-width:370px}
+.hero .button{background:#f1c58c;border-color:#f1c58c;color:#1c332b;box-shadow:0 6px 24px #061e1840}
+.hero .button:hover{background:#ffe0b6;color:#122b22}
+.hero-foot{border-color:#e6ddc54d;color:#e2e9df}
+.hero-visual{--rx:0deg;--ry:0deg;transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(calc(-5deg + var(--ry)));transition:transform .32s ease-out;box-shadow:22px 32px 60px #061c1973;border:8px solid #faf3e7;border-radius:4px;background:#faf3e7;max-width:510px;justify-self:end;width:100%}
+.hero-visual::before{content:'';position:absolute;inset:12px;border:1px solid #fff7d780;z-index:2;pointer-events:none;transform:translateZ(20px)}
+.hero-visual .food-image{aspect-ratio:1.12}
+.hero-caption{background:#faf3e7;color:#17392f;padding:22px 20px;transform:translateZ(12px)}
+.hero-caption:hover{background:#f1e4cd;color:#17392f}
+.hero-caption>span{color:#635f50}
+.floating-note{position:absolute;right:-28px;top:-28px;z-index:3;background:#e3a86e;color:#213b2e;padding:17px 22px;box-shadow:0 12px 30px #0a241d55;font-size:11px;letter-spacing:2px;transform:translateZ(55px) rotate(7deg);line-height:1.8;pointer-events:none}
+.floating-note em{font-family:var(--display);font-size:12px;letter-spacing:0}
+.background-credit{position:absolute;bottom:8px;right:24px;font-size:10px;color:#eee9dc;margin:0}
+.ticker{background:#e9e4d6;border-color:#c7c5b5;color:#294939}
+.catalog{padding-block:80px 90px}
+.dish-grid{gap:36px 28px;perspective:1500px}
+.dish-card{--rx:0deg;--ry:0deg;position:relative;padding:12px 12px 22px;border:1px solid #d8d1c1;border-radius:5px;background:#fffdf7;box-shadow:0 6px 15px #38372308;transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .3s ease-out,box-shadow .3s ease,border-color .3s}
+.dish-card .food-image{border-radius:2px}
+.dish-card h3{font-size:30px;line-height:1.2}
+.dish-card h3 a{align-items:flex-start}
+.dish-card h3 span{flex-shrink:0}
+.dish-card .card-meta,.dish-card h3,.dish-card>p,.dish-card>.status{transform:translateZ(14px)}
+@media(hover:hover) and (pointer:fine){.dish-card:hover{box-shadow:0 24px 40px #19362d26;border-color:#b7b39e}.dish-card::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:radial-gradient(circle at var(--light-x,50%) var(--light-y,50%),#fff8da38,transparent 65%);opacity:0;transition:opacity .3s}.dish-card:hover::after{opacity:1}}
+.editorial-note{background:#e9eddf;border:1px solid #cbd3bf;border-radius:4px;padding:44px;margin-bottom:56px}
+@keyframes sceneArrival{from{opacity:.5;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes titleArrival{from{opacity:.5;translate:-16px 0}to{opacity:1;translate:0 0}}
+@media(prefers-reduced-motion:no-preference){.hero-copy{animation:titleArrival .85s ease-out both}.hero .eyebrow{animation:sceneArrival .65s ease-out both}.hero .button{animation:sceneArrival .95s ease-out both}.dish-card.scene-entered{animation:sceneArrival .6s ease-out}.editorial-note.scene-entered{animation:titleArrival .8s ease-out}}
+@media(max-width:1000px){.hero{gap:40px;min-height:600px}.hero h1{font-size:60px}.floating-note{right:-8px;font-size:9px;padding:12px 14px}.dish-card h3{font-size:26px}}
+@media(max-width:600px){.site-header{min-height:88px}.hero{min-height:0;padding-block:22px 30px;gap:22px}.hero h1{font-size:42px;line-height:1.1;letter-spacing:-1.5px;margin-bottom:12px}.hero .eyebrow{font-size:9px;margin-bottom:10px}.hero-intro{font-size:13px;margin-bottom:14px}.hero-foot{font-size:9px;margin-top:14px}.hero-visual{max-width:100%;border-width:5px;transform:none;box-shadow:10px 16px 32px #061c1973}.hero-visual .food-image{height:165px;aspect-ratio:auto}.hero-caption{padding:12px 15px}.hero-caption strong{font-size:25px;margin-top:5px}.floating-note{top:-14px;right:8px;padding:8px 12px;transform:rotate(5deg);font-size:8px}.floating-note em{font-size:10px}.background-credit{font-size:8px;bottom:6px;right:16px}.scene-background{background-position:62% center;transform:none}.catalog{padding-block:42px 50px}.dish-grid{gap:20px 12px}.dish-card{padding:7px 7px 15px;transform:none}.dish-card h3{font-size:23px;line-height:1.25;letter-spacing:-.5px}.dish-card h3 span{font-size:16px}.dish-card .card-meta{font-size:8px;letter-spacing:.4px}.editorial-note{padding:24px}.hero-visual::before{inset:8px}}
+@media(prefers-reduced-motion:reduce){[data-tilt]{transform:none!important}.scene-background{transform:none}.hero-copy,.dish-card,.editorial-note{animation:none!important}}

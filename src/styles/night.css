@@ -1,0 +1,37 @@
+/* Da Lat after dusk: forest charcoal, ivory, lantern amber. */
+:root{color-scheme:dark;--paper:#0e1916;--ink:#f2ecdf;--muted:#b4c0b8;--accent:#efb77a;--line:#35473e;--white:#182822;--forest:#11221b;background:#0e1916;color:#f2ecdf}
+body{background-color:#0e1916;background-image:radial-gradient(#d1bd8e0a .6px,transparent .6px)}
+.site-header{border-color:#35473e}
+.brand-logo img{filter:brightness(0) invert(1);opacity:.92}
+.header-tag{color:#b4c0b8}
+.hero-scene{background:#10241b}
+.scene-background{background-image:linear-gradient(90deg,rgba(5,19,15,.94),rgba(5,19,15,.65) 54%,rgba(5,19,15,.38)),url('/images/dalat-mist-background.webp')}
+.hero-visual{border-color:#b6b099;background:#b6b099;box-shadow:22px 32px 65px #0008}
+.hero-caption{background:#1b3027;color:#f2ecdf}
+.hero-caption>span{color:#c0cbbd}
+.hero-caption:hover{background:#274335;color:#fff4df}
+.floating-note{background:#d9a76f;color:#152b20}
+.ticker{background:#14261e;border-color:#35473e;color:#d2dfce}
+.ticker span:nth-child(2){color:#efb77a}
+.dish-card{background:#192a22;border-color:#35473e;box-shadow:0 8px 20px #0002}
+.dish-card:hover{border-color:#818c67;box-shadow:0 24px 40px #0005}
+.dish-card h3{color:#f2ecdf}
+.dish-card .card-meta,.dish-card .card-address{color:#b9c7bd}
+.filters button{color:#e3e9df;border-color:#4c5e51}
+.filters button:hover{background:#263c2e;color:#fff4df}
+.filters button.active{background:#e5bd85;border-color:#e5bd85;color:#152b20}
+.search input{background:#192a22;border-color:#4c5e51;color:#f2ecdf}
+.search input::placeholder{color:#abb8b0;opacity:1}
+.status{background:#343329;color:#f2cd9f;border-color:#746347}
+.editorial-note{background:#182a21;border-color:#40533e}
+.provenance{border-color:#40533e}
+.practical-panel{background:#192a22;border-color:#40533e}
+.button{background:#e5bd85;border-color:#e5bd85;color:#152b20}
+.button:hover{background:#f6d7a7;color:#102319}
+.food-image,.image-fallback{background:#27382a}
+.image-fallback span{color:#ecd1a6}
+.image-fallback small{color:#d0d9c8}
+.skip{background:#e5bd85;color:#152b20}
+:focus-visible{outline-color:#f3c584}
+::selection{background:#e5bd85;color:#102319}
+footer .brand-dot{color:#efb77a}

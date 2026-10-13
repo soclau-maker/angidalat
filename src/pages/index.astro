@@ -1,15 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import CinematicEffects from '../components/CinematicEffects.astro';
 import FoodImage from '../components/FoodImage.astro';
 import DishCard from '../components/DishCard.astro';
-import Provenance from '../components/Provenance.astro';
-import {dishes} from '../data/catalog.mjs';
+import {dishes,restaurants} from '../data/catalog.mjs';
 ---
 <Layout title="Ăn gì hôm nay? Khám phá món ngon Đà Lạt">
- <section class="hero wrap"><div class="hero-copy"><p class="eyebrow">SỔ TAY ẨM THỰC / SỐ 01</p><h1>Đến Đà Lạt.<br/>Đi tìm<br/><em>một món ăn.</em></h1><p class="hero-intro">Giữa những cuộc dạo chơi, hãy để một món ăn trở thành điểm hẹn tiếp theo.</p><a class="button" href="#mon-an">Hôm nay ăn gì? <span aria-hidden="true">↘</span></a><div class="hero-foot"><span>03 MÓN ĂN</span><span>03 ĐỊA CHỈ GỢI Ý</span></div></div><div class="hero-visual"><FoodImage src="/images/nem-nuong.webp" name="Nem nướng" eager/><a class="hero-caption" href="/mon/nem-nuong/"><span>MÓN ĐẦU TIÊN TRONG SỔ TAY</span><strong>Nem nướng <span aria-hidden="true">↗</span></strong></a></div></section>
+ <section class="hero-scene"><div class="scene-background" aria-hidden="true"></div><div class="hero wrap"><div class="hero-copy"><p class="eyebrow">SỔ TAY ẨM THỰC / SỐ 01</p><h1>Đến Đà Lạt.<br/>Đi tìm<br/><em>một món ăn.</em></h1><p class="hero-intro">Giữa những cuộc dạo chơi, hãy để một món ăn trở thành điểm hẹn tiếp theo.</p><a class="button" href="#mon-an">Hôm nay ăn gì? <span aria-hidden="true">↘</span></a><div class="hero-foot"><span>{String(dishes.length).padStart(2,'0')} MÓN ĂN</span><span>{String(restaurants.length).padStart(2,'0')} ĐỊA CHỈ GỢI Ý</span></div></div><div class="hero-visual" data-tilt><span class="floating-note" aria-hidden="true">ĐÀ LẠT<br/><em>chạm một chút, nhớ một đời.</em></span><FoodImage src="/images/nem-nuong.webp" name="Nem nướng" eager/><a class="hero-caption" href="/mon/nem-nuong/"><span>MÓN ĐẦU TIÊN TRONG SỔ TAY</span><strong>Nem nướng <span aria-hidden="true">↗</span></strong></a></div></div></section>
+ <script is:inline define:vars={{featuredDishes:dishes}}>
+  const featured = featuredDishes[Math.floor(Math.random() * featuredDishes.length)];
+  const visual = document.querySelector('.hero-visual');
+  const photo = visual.querySelector('img');
+  photo.style.removeProperty('display');
+  photo.src = featured.image;
+  photo.alt = `Hình minh họa AI món ${featured.name}, không phải ảnh món tại quán`;
+  visual.querySelector('.image-fallback small').textContent = featured.name;
+  const link = visual.querySelector('.hero-caption');
+  link.href = `/mon/${featured.slug}/`;
+  link.querySelector('strong').replaceChildren(document.createTextNode(featured.name + ' '));
+  const arrow = document.createElement('span');
+  arrow.setAttribute('aria-hidden','true'); arrow.textContent = '↗';
+  link.querySelector('strong').append(arrow);
+ </script>
  <div class="ticker"><div class="wrap"><span>CHỌN MÓN TRƯỚC. TÌM QUÁN SAU.</span><span aria-hidden="true">✳</span><span>MỘT CHUYẾN ĐI, NHIỀU HƯƠNG VỊ.</span></div></div>
- <section class="catalog wrap" id="mon-an" aria-labelledby="catalog-title"><div class="section-heading"><div><p class="eyebrow">BẮT ĐẦU TỪ MÓN BẠN THÍCH</p><h2 id="catalog-title">Hôm nay, ăn gì?</h2></div><p>Ba món. Ba điểm dừng.<br/>Một hành trình do bạn chọn.</p></div><div class="catalog-tools" id="search-tools" hidden><div class="filters" role="group" aria-label="Lọc loại món"><button class="active" data-category="all" aria-pressed="true">Tất cả</button><button data-category="mon-cuon" aria-pressed="false">Món cuốn</button><button data-category="mon-nuoc" aria-pressed="false">Món nước</button></div><div class="search"><label for="food-search">Tìm món hoặc địa chỉ</label><input id="food-search" type="search" placeholder="Thử “mi quang” hoặc “ba hung”…" autocomplete="off"/></div></div><p id="result-count" class="result-count" aria-live="polite">3 món để khám phá</p><div class="dish-grid">{dishes.map((dish,index)=><DishCard dish={dish} index={index}/>)}</div><div id="empty-state" class="empty-state" hidden><h3>Chưa có món bạn tìm.</h3><p>Thử tên món, tên quán hoặc một con đường khác.</p><button id="reset-search" class="button">Xem tất cả món</button></div><noscript><p>Các món vẫn hiển thị đầy đủ. Bật JavaScript để tìm kiếm và lọc.</p></noscript></section>
- <section class="editorial-note wrap" id="ghi-chu"><div><p class="eyebrow">MỘT CHÚT CHUẨN BỊ</p><h2>Đi với tò mò.<br/>Ghé với thông tin.</h2></div><div><p>Đây là sổ tay gợi ý, không phải bảng xếp hạng. Chúng tôi không chấm điểm hay đưa ra nhận xét về chất lượng các quán.</p><Provenance/><p class="small">Hình ảnh được tạo bằng AI để minh họa món ăn; không đại diện cho khẩu phần hoặc cách trình bày thực tế tại quán. Liên kết Maps chỉ tìm theo tên và địa chỉ, không phải ghim đã xác minh.</p></div></section>
+ <section class="catalog wrap" id="mon-an" aria-labelledby="catalog-title"><div class="section-heading"><div><p class="eyebrow">BẮT ĐẦU TỪ MÓN BẠN THÍCH</p><h2 id="catalog-title">Hôm nay, ăn gì?</h2></div><p>Thêm món ngon. Thêm lựa chọn.<br/>Một hành trình do bạn chọn.</p></div><div class="catalog-tools" id="search-tools" hidden><div class="filters" role="group" aria-label="Lọc loại món"><button class="active" data-category="all" aria-pressed="true">Tất cả</button><button data-category="mon-cuon" aria-pressed="false">Món cuốn</button><button data-category="mon-nuoc" aria-pressed="false">Món nước</button><button data-category="an-nhe" aria-pressed="false">Ăn nhẹ</button><button data-category="mon-lau" aria-pressed="false">Món lẩu</button></div><div class="search"><label for="food-search">Tìm món hoặc địa chỉ</label><input id="food-search" type="search" placeholder="Thử “mi quang” hoặc “ba hung”…" autocomplete="off"/></div></div><p id="result-count" class="result-count" aria-live="polite">{dishes.length} món để khám phá</p><div class="dish-grid">{dishes.map((dish,index)=><DishCard dish={dish} index={index}/>)}</div><div id="empty-state" class="empty-state" hidden><h3>Chưa có món bạn tìm.</h3><p>Thử tên món, tên quán hoặc một con đường khác.</p><button id="reset-search" class="button">Xem tất cả món</button></div><noscript><p>Các món vẫn hiển thị đầy đủ. Bật JavaScript để tìm kiếm và lọc.</p></noscript></section>
+ <section class="editorial-note wrap" id="ghi-chu"><div><p class="eyebrow">MỘT CHÚT CHUẨN BỊ</p><h2>Đi với tò mò.<br/>Ghé với thông tin.</h2></div><div><p>Đây là sổ tay gợi ý, không phải bảng xếp hạng. Chúng tôi không chấm điểm hay đưa ra nhận xét về chất lượng các quán.</p></div></section>
+<CinematicEffects/>
 </Layout>
 <script>
 import {searchDishes} from '../data/catalog.mjs';

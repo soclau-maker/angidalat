@@ -23,8 +23,10 @@ npm run test:e2e
 
 - `src/data/catalog.mjs`: danh sách món, quán, trạng thái nguồn, ngày ghi nhận. Thêm slug duy nhất, liên kết `restaurant.dish` đúng slug món. Các route được tạo tự động tại `/mon/<slug>/` và `/quan/<slug>/`.
 - `src/pages/index.astro`: lời dẫn biên tập; `src/styles/global.css`: giao diện và breakpoint.
-- `public/images/{nem-nuong,mi-quang,bun-bo}.webp`: ảnh AI minh họa 1200×1200. Không dùng như ảnh quán thực tế. Component tự hiển thị nền dự phòng khi thiếu ảnh.
+- `public/images/*.webp`: ảnh AI minh họa 1200×1200. Không dùng như ảnh quán thực tế. Component tự hiển thị nền dự phòng khi thiếu ảnh.
 - Không sửa dữ liệu chưa biết thành số đoán: giờ/giá `null`, số nhà chưa có `null`, `verified:false`. Khi xác minh, ghi nguồn cụ thể và ngày; đồng thời cập nhật cách trình bày, không chỉ đổi boolean.
+
+Danh mục có 8 món; Phở, Bún riêu, Bánh mì xíu mại, Bánh tráng nướng Đà Lạt và Lẩu cá tầm chưa có quán/địa chỉ, hiển thị đang cập nhật (không tạo dữ liệu quán giả). Số món và số địa chỉ trên trang chủ lấy từ dữ liệu.
 
 Dữ liệu ban đầu do người dùng cung cấp ngày 09/10/2026: Nem nướng Bà Hùng — 328 Phan Đình Phùng; Mì Quảng Xí — đường Mạc Đỉnh Chi; Bún Bò Hồng — đường Phan Đình Phùng. **Chưa xác minh độc lập**. Hai quán sau chưa có số nhà. Không có đánh giá/chấm điểm hoặc khẳng định về chất lượng, nội thất, lịch sử. Maps là tìm kiếm tên + địa chỉ được mã hóa URL, không ghim đã xác minh. Ảnh là AI, không phải món tại quán.
 
@@ -36,7 +38,7 @@ Có thể deploy thủ công (sau khi được chủ dự án cho phép), ví d�
 
 ## Quyết định thiết kế
 
-Giấy ivory, chữ charcoal, điểm nhấn đỏ gạch; typography lớn kiểu tạp chí, food photography làm trung tâm. Bố cục close-crop ấm áp lấy cảm hứng thị giác từ Wong Kar-wai / In the Mood for Love nhưng tránh animation nặng. Responsive: 3 cột desktop, 2 cột mobile; giảm chuyển động theo hệ điều hành, nhãn form, aria-live, focus visible, skip link và breadcrumb. Dùng font hệ thống để không tải font ngoài.
+Giấy ivory, chữ charcoal, điểm nhấn đỏ gạch; typography lớn kiểu tạp chí, food photography làm trung tâm. Bố cục close-crop ấm áp lấy cảm hứng thị giác từ Wong Kar-wai / In the Mood for Love nhưng tránh animation nặng. Responsive: 3 cột desktop, 2 cột mobile; giảm chuyển động theo hệ điều hành, nhãn form, aria-live, focus visible, skip link và breadcrumb. Tiêu đề dùng Lora có bộ tiếng Việt, tự lưu cùng website qua @fontsource/lora; nội dung dùng font sans-serif hệ thống.
 
 ## TDD
 
